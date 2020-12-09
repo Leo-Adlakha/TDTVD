@@ -1,3 +1,5 @@
+# $ python3 convertor.py -i ../original_video/example.mp4 -o ../original_video/output.mp4 -f 30 -c h264
+
 from __future__ import print_function
 from imutils.video import VideoStream
 import numpy as np
