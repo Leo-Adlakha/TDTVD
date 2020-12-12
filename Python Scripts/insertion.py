@@ -1,7 +1,7 @@
 import numpy as np
 import cv2 as cv
 
-txt_file = "/Users/leoadlakha/Documents/Research Work/TDTVD/csv/input.txt"
+txt_file = "/Users/leoadlakha/Documents/Research Work/TDTVD/csv/input_ins.txt"
 
 with open(txt_file, "r") as my_input_file :
     data = my_input_file.read().splitlines(True)
@@ -10,9 +10,6 @@ for i in range(len(data)):
     data[i] = data[i].rstrip('\n')
 
 for i in range(len(data)) :
-
-    if i == 0 :
-        continue
 
     inp = data[i]
     got_addr = 0 
@@ -63,9 +60,9 @@ for i in range(len(data)) :
             break 
 
     if ins_type == 'S' :
-        writer = cv.VideoWriter("../Frame_Insertion/Same/" + str(i) + ".mp4", codec, 30, (w, h), True)
+        writer = cv.VideoWriter("../Frame_Insertion/Same/" + str(i+1) + ".mp4", codec, 30, (w, h), True)
     else :
-        writer = cv.VideoWriter("../Frame_Insertion/Different/" + str(i) + ".mp4", codec, 30, (w, h), True)
+        writer = cv.VideoWriter("../Frame_Insertion/Different/" + str(i+1) + ".mp4", codec, 30, (w, h), True)
 
     count = 0 
     while True :

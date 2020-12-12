@@ -1,0 +1,2 @@
+/Users/leoadlakha/Documents/Research Work/TDTVD/original_video/car_parking_nsut.mp4 /Users/leoadlakha/Documents/Research Work/TDTVD/original_video/car_parking_nsut.mp4 100 30 80 S
+/Users/leoadlakha/Documents/Research Work/TDTVD/original_video/example.mp4 /Users/leoadlakha/Documents/Research Work/TDTVD/original_video/example2.mp4 100 30 80 D
