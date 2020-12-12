@@ -30,7 +30,7 @@ for i in range(len(data)) :
     print(imp_data)
 
     cap = cv.VideoCapture(imp_data[0])
-    codec = cv.VideoWriter_fourcc(*"h264")
+    codec = cv.VideoWriter_fourcc('a', 'v', 'c', 'l')
     writer = None
     (h, w) = (None, None)
     zeros = None

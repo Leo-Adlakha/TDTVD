@@ -11,12 +11,13 @@ import cv2 as cv
 ap = argparse.ArgumentParser()
 ap.add_argument("-o", "--output", required=True, help="path to output video file")
 ap.add_argument("-f", "--fps", type=int, default=30, help="FPS of output video")
-ap.add_argument("-c", "--codec", type=str, default="h264", help="codec of output video")
+ap.add_argument("-c", "--codec", type=str, default="avc1", help="codec of output video")
 ap.add_argument("-i", "--input", required=True, help="path to input video file")
 args = vars(ap.parse_args())
 
 cap = cv.VideoCapture(args["input"])
-codec = cv.VideoWriter_fourcc(*args["codec"])
+codec_info = list(args["codec"])
+codec = cv.VideoWriter_fourcc(codec_info[0], codec_info[1], codec_info[2], codec_info[3])
 writer = None
 (h, w) = (None, None)
 zeros = None
