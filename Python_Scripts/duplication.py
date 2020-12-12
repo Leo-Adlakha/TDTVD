@@ -27,10 +27,10 @@ for i in range(len(data)) :
             
     end_data = inp.split()
     imp_data.append(end_data)
-    print(imp_data)
+    # print(imp_data)
 
     cap = cv.VideoCapture(imp_data[0])
-    codec = cv.VideoWriter_fourcc('a', 'v', 'c', 'l')
+    codec = cv.VideoWriter_fourcc('a', 'v', 'c', '1')
     writer = None
     (h, w) = (None, None)
     zeros = None
