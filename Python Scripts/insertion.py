@@ -11,16 +11,36 @@ for i in range(len(data)):
 
 for i in range(len(data)) :
 
-    (insert_in, insert_from, start_ins, ins_start, ins_end) = data[i].split(" ")
+    if i == 0 :
+        continue
 
-    cap = cv.VideoCapture("../original_video/example.mp4")
-    cap2 = cv.VideoCapture("../original_video/example2.mp4")
-    codec = cv.VideoWriter_fourcc(*"h264")
+    inp = data[i]
+    got_addr = 0 
+    last_idx = 0
+    imp_data = []
+    for j in range(len(inp)) :
+        if inp[j:j+4] == 'mp4 ' :
+            imp_data.append(inp[last_idx:j+3])
+            got_addr += 1
+            last_idx = j + 4
+        
+        if got_addr >= 2 : 
+            inp = inp[last_idx:]
+            break
+            
+    end_data = inp.split()
+    imp_data.append(end_data)
+    # print(imp_data)
+
+    cap = cv.VideoCapture(imp_data[0])
+    cap2 = cv.VideoCapture(imp_data[1])
+    codec = cv.VideoWriter_fourcc('a','v','c','1')
     writer = None
     (h, w) = (None, None)
-    ins_start = 30
-    ins_end = 80
-    start_ins = 100
+    start_ins = int(imp_data[2][0])
+    ins_start = int(imp_data[2][1])
+    ins_end = int(imp_data[2][2])
+    ins_type = imp_data[2][3]
     count = 0
     storage = []
 
@@ -42,11 +62,15 @@ for i in range(len(data)) :
         if cv.waitKey(1) == ord('q') :
             break 
 
-    writer = cv.VideoWriter("../test/output_insertion.mp4", codec, 30, (w, h), True)
+    if ins_type == 'S' :
+        writer = cv.VideoWriter("../Frame_Insertion/Same/" + str(i) + ".mp4", codec, 30, (w, h), True)
+    else :
+        writer = cv.VideoWriter("../Frame_Insertion/Different/" + str(i) + ".mp4", codec, 30, (w, h), True)
+
     count = 0 
     while True :
         
-        ret, frame = cap.read() ;
+        ret, frame = cap.read() 
         if not ret :
             print("Can't receive frame (stream end?). Exiting ...")
             break
@@ -58,7 +82,7 @@ for i in range(len(data)) :
 
     total_frames = count
     count = 0 
-    cap = cv.VideoCapture("../original_video/example.mp4")
+    cap = cv.VideoCapture(imp_data[0])
 
     while True :
         # Capture frame-by-frame
